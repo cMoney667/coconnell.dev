@@ -1,6 +1,7 @@
 {
     "require": {
-        "tightenco/jigsaw": "^1.7"
+        "tightenco/jigsaw": "^1.7",
+        "blade-ui-kit/blade-heroicons": "^2.1"
     },
     "php": "^8.2"
 }

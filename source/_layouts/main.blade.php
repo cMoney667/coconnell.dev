@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="{{ mix('css/main.css', 'assets/build') }}">
         <script defer src="{{ mix('js/main.js', 'assets/build') }}"></script>
     </head>
-    <body>
+    <body class="fullscreen">
         <header>
             <h1>Collin O'Connell</h1>
         </header>
@@ -17,7 +17,7 @@
             @yield('body')
         </main>
         <footer>
-            Copyright &copy;
+            Copyright &copy; {{ date('Y') }} <a href="//coconnell.dev">coconnell.dev</a>
         </footer>
     </body>
 </html>
