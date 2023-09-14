@@ -1,13 +1,19 @@
-/build_local/
-/cache/
-/node_modules/
-/vendor/
-/.idea/
-/.vscode/
+/.phpunit.cache
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+.env
+.env.backup
+.env.production
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+auth.json
 npm-debug.log
-
-# Optional ignores
-# /build_staging/
-# /build_production/
-# /source/assets/build/
-build_production
+yarn-error.log
+/.fleet
+/.idea
+/.vscode
