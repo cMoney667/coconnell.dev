@@ -1,8 +1,13 @@
 <?php
 
+use App\Models\Post;
 use function Laravel\Folio\name;
 
 name('home');
+
+$postsClass = new Post;
+
+$posts = Post::getLatest(5);
 
 ?>
 
@@ -13,4 +18,23 @@ name('home');
                                                                              target="_blank">Gardner-White Furniture</a>.
         I enjoy working with HTML, CSS, PHP and Javascript.
     </p>
+
+    @forelse($posts as $post)
+        <article>
+            <h3>
+                <a href="/posts/{{ $post->slug }}">
+                    {{ $post->meta['title'] }}
+                </a>
+            </h3>
+            <p>
+                <time>{{ date('M d, Y', $post->meta['published_on']) }}</time>
+            </p>
+
+            <p>
+                {{ $post->meta['excerpt'] }}
+            </p>
+        </article>
+    @empty
+        <p>No Posts</p>
+    @endforelse
 </x-layout>
