@@ -3,8 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
@@ -18,6 +16,10 @@ use SplFileInfo;
 use stdClass;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ * @property string slug
+ * @property string body
+ */
 class Post
 {
     public static Collection $filenames;
@@ -49,10 +51,14 @@ class Post
         return collect($posts);
     }
 
+    /**
+     * @param string $filename
+     * @return Post
+     * @throws \League\CommonMark\Exception\CommonMarkException
+     */
     public static function getPostData(string $filename): object
     {
         $post = new stdClass();
-        $file = null;
         try {
             $file = (new self)->filesystem->get(app_path('Posts/' . $filename));
         } catch (FileNotFoundException $e) {
@@ -63,7 +69,7 @@ class Post
         $object = YamlFrontMatter::parse($file);
 
         $post->slug = str_replace('.md', '', $filename);
-        $post->meta = $object->matter();
+        $post->meta = (object)$object->matter();
 
         $environment = new Environment();
         $environment->addExtension(new CommonMarkCoreExtension());

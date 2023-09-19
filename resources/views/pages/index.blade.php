@@ -22,19 +22,19 @@ $posts = Post::getLatest(5);
     @forelse($posts as $post)
         <article>
             <h3>
-                <a href="/posts/{{ $post->slug }}">
-                    {{ $post->meta['title'] }}
+                <a href="/posts/{{ $post->slug }}" preload>
+                    {{ $post->meta?->title }}
                 </a>
             </h3>
             <p>
-                <time>{{ date('M d, Y', $post->meta['published_on']) }}</time>
+                <time>{{ date('M d, Y', $post->meta->published_on) }}</time>
             </p>
 
             <p>
-                {{ $post->meta['excerpt'] }}
+                {{ $post->meta?->excerpt }}
             </p>
         </article>
     @empty
-        <p>No Posts</p>
+        <p class="text-align:center">No Posts.... yet</p>
     @endforelse
 </x-layout>
