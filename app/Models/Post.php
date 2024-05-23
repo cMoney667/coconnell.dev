@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use League\CommonMark\CommonMarkConverter;
 use League\CommonMark\Environment\Environment;
+use League\CommonMark\Exception\CommonMarkException;
 use League\CommonMark\Extension\Attributes\AttributesExtension;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
@@ -45,7 +46,11 @@ class Post
         $posts = [];
 
         foreach (self::$filenames->take($limit) as $filename) {
-            $posts[] = self::getPostData($filename);
+            try {
+                $posts[] = self::getPostData($filename);
+            } catch (CommonMarkException $exception) {
+                Log::debug($exception->getMessage());
+            }
         }
 
         return collect($posts);
