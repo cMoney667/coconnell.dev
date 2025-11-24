@@ -31,7 +31,7 @@ jobs:
         run: php hyde build --no-interaction
 
       - name: Upload site artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-pages-artifact@v4
         with:
           name: site
           path: _site
