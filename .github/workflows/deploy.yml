@@ -37,7 +37,6 @@ jobs:
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          name: site
           path: _site
   deploy:
     runs-on: ubuntu-latest
@@ -51,21 +50,6 @@ jobs:
       name: github-pages
       url: ${{steps.deployment.outputs.page_url}}
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: 'gh-pages'
-
-      - name: Empty site directory
-        run: rm -rf *
-
-      - name: Download site directory
-        uses: actions/download-artifact@v4
-        with:
-          name: site
-          path: .
-
-      - name: Create .nojekyll file
-        run: touch .nojekyll
 
       - name: Deploy to GitHub Pages
         id: deployment
