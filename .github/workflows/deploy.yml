@@ -30,6 +30,10 @@ jobs:
       - name: Build the site
         run: php hyde build --no-interaction
 
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v4
         with:
@@ -43,7 +47,9 @@ jobs:
       pages: write
       id-token: write
 
-
+    environment:
+      name: github-pages
+      url: ${{steps.deployment.outputs.page_url}}
     steps:
       - uses: actions/checkout@v4
         with:
